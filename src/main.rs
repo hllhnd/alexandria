@@ -36,15 +36,16 @@ fn main()
         let reader = FlacReader::open(&file).unwrap();
 
         let mut new_path = current_dir().unwrap();
-        new_path.push(reader.get_tag("ARTIST").next().unwrap_or_default());
-        new_path.push(reader.get_tag("ALBUM").next().unwrap_or_default());
-        new_path.push(reader.get_tag("TITLE").next().unwrap_or_default());
+        new_path.push(reader.get_tag("ARTIST").next().unwrap_or_default().replace('/', "_"));
+        new_path.push(reader.get_tag("ALBUM").next().unwrap_or_default().replace('/', "_"));
+        new_path.push(reader.get_tag("TITLE").next().unwrap_or_default().replace('/', "_"));
+
         new_path.set_extension("flac");
 
         mappings.insert(file, new_path);
     }
 
-    for (old_path, new_path) in mappings.iter() {
+    for (old_path, new_path) in mappings.iter().filter(|(old_path, new_path)| old_path != new_path) {
         println!(
             "{} -> {}",
             old_path.strip_prefix(current_dir().unwrap()).unwrap().display(),
