@@ -56,7 +56,7 @@ fn main()
     println!("Confirm? (y/N)");
     stdin().read_line(&mut input).unwrap();
 
-    match input.as_str() {
+    match input.trim() {
         "y" | "Y" =>
             for (old_path, new_path) in mappings.iter() {
                 create_dir_all(new_path.parent().unwrap()).unwrap();
