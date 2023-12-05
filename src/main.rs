@@ -39,8 +39,7 @@ fn main()
         new_path.push(reader.get_tag("ARTIST").next().unwrap_or_default().replace('/', "_"));
         new_path.push(reader.get_tag("ALBUM").next().unwrap_or_default().replace('/', "_"));
         new_path.push(reader.get_tag("TITLE").next().unwrap_or_default().replace('/', "_"));
-
-        new_path.set_extension("flac");
+        new_path.set_file_name(format!("{}.flac", new_path.file_name().unwrap().to_str().unwrap()));
 
         mappings.insert(file, new_path);
     }
