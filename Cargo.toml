@@ -1,0 +1,8 @@
+[package]
+name = "alexandria"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+claxon = "0.4"
+walkdir = "2.4"
